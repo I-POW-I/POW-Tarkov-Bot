@@ -1,0 +1,26 @@
+{
+  "name": "tarkov-bot-system",
+  "version": "1.0.0",
+  "description": "Complete Tarkov Discord bot system with API and dashboard",
+  "workspaces": [
+    "bot",
+    "api",
+    "dashboard",
+    "data-collection"
+  ],
+  "scripts": {
+    "install-all": "npm install && cd bot && npm install && cd ../api && npm install && cd ../dashboard && npm install && cd ../data-collection && npm install",
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "start": "npm start --workspaces"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "tarkov",
+    "eft",
+    "database"
+  ],
+  "author": "",
+  "license": "MIT"
+}
