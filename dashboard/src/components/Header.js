@@ -1,21 +1,55 @@
 import React from 'react';
+import { RefreshCw, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
-export default function Header({ apiStatus }) {
+export default function Header({ apiStatus, onSync }) {
+  const { theme, toggleTheme } = useTheme();
+  const isOnline = apiStatus === 'online';
+
   return (
-    <header className="bg-gray-900 border-b border-gray-700 shadow">
-      <div className="px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">Tarkov Bot Dashboard</h1>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className={`w-3 h-3 rounded-full ${apiStatus === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></div>
-            <span className="text-sm text-gray-400">
-              API: <span className={apiStatus === 'online' ? 'text-green-400' : 'text-red-400'}>{apiStatus}</span>
-            </span>
-          </div>
-          <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition">
-            Sync Data
-          </button>
+    <header style={{
+      background: 'var(--bg-secondary)',
+      borderBottom: '1px solid var(--border-primary)',
+      padding: '0 28px',
+      height: 56,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexShrink: 0,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <h1 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-primary)' }}>
+          Dashboard
+        </h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div className={`status-dot ${isOnline ? 'status-dot-online' : 'status-dot-offline'}`} />
+          <span style={{
+            fontSize: 12,
+            fontWeight: 500,
+            color: isOnline ? 'var(--accent-emerald)' : 'var(--accent-rose)',
+          }}>
+            API {apiStatus}
+          </span>
         </div>
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <button
+          onClick={onSync}
+          className="btn btn-ghost"
+          style={{ fontSize: 13 }}
+        >
+          <RefreshCw size={14} />
+          Sync
+        </button>
+        <button
+          onClick={toggleTheme}
+          className="btn btn-ghost"
+          style={{ fontSize: 13 }}
+        >
+          {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+          {theme === 'dark' ? 'Light' : 'Dark'}
+        </button>
       </div>
     </header>
   );
