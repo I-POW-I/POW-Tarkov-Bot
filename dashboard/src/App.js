@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -9,6 +10,11 @@ import Prices from './pages/Prices';
 import Analytics from './pages/Analytics';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY
+);
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState('dashboard');

@@ -6,8 +6,17 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const PORT = process.env.API_PORT || 3001;
 
-// Middleware
-app.use(cors());
+// CORS - allow Vercel frontend and local development
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins.length > 0 ? allowedOrigins : true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Admin-Key'],
+}));
 app.use(express.json());
 
 // Supabase Client
@@ -139,9 +148,9 @@ app.get('/api/updates/latest', async (req, res) => {
 // Admin: Sync data
 app.post('/api/admin/sync', async (req, res) => {
   try {
-    const { key } = req.headers;
+    const adminKey = req.headers['x-admin-key'];
 
-    if (key !== process.env.ADMIN_KEY) {
+    if (adminKey !== process.env.ADMIN_KEY) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
