@@ -1,6 +1,6 @@
-# Tarkov Discord Bot - Complete System
+# Tarkov Discord Bot + Dashboard (Work In Progress) - Complete System
 
-A comprehensive Discord bot system for Escape from Tarkov featuring:
+A comprehensive Discord bot system + dashboard for Escape from Tarkov featuring:
 - Item Database Lookup
 - Quest Helper
 - Map Database
@@ -16,8 +16,7 @@ tarkov-bot/
 ├── api/              # Express.js backend API
 ├── dashboard/        # React web interface
 ├── data-collection/  # Tarkov data scraper
-├── database/         # Database schemas & migrations
-└── docs/            # Documentation
+└── database/         # Database schemas & migrations
 ```
 
 ## 🚀 Tech Stack
@@ -32,7 +31,7 @@ tarkov-bot/
 ### Prerequisites
 - Node.js 18+
 - npm or yarn
-- Supabase account (free)
+- Supabase account
 - Discord Bot Token
 - Railway account
 - Vercel account
@@ -48,14 +47,11 @@ tarkov-bot/
    cd ../data-collection && npm install
    ```
 
-3. Copy `.env.example` to `.env` and fill in values
+3. Copy `.env.example` to a new`.env` file and fill in the values
 4. Run database migrations
 5. Start data collection script
 6. Deploy services
 
-## 📚 Documentation
-
-See individual README files in each directory for detailed setup.
 
 ## 📦 Services
 
