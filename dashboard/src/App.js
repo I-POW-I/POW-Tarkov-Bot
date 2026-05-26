@@ -28,6 +28,8 @@ function AppContent() {
     } catch {
       setApiStatus('offline');
     }
+import Ammo from './pages/Ammo';
+import Crafts from './pages/Crafts';
   };
 
   const handlePageChange = (page) => {
@@ -81,3 +83,9 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
+            {/* Ammo */}
+            <Route path="/ammo" element={<Ammo />} />
+
+            {/* Crafts */}
+            <Route path="/crafts" element={<Crafts />} />

@@ -21,6 +21,7 @@ app.use(express.json());
 
 // Supabase Client
 const supabase = createClient(
+const ammoRouter = require('./routes/ammo');
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
@@ -119,6 +120,7 @@ app.get('/api/prices/search', async (req, res) => {
       .limit(1);
 
     if (error) throw error;
+app.use('/api/ammo', ammoRouter);
 
     res.json(data?.[0] || null);
   } catch (error) {
