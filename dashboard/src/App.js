@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Prices from './pages/Prices';
 import Analytics from './pages/Analytics';
+import Ammo from './pages/Ammo';
+import Crafts from './pages/Crafts';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
@@ -28,8 +30,6 @@ function AppContent() {
     } catch {
       setApiStatus('offline');
     }
-import Ammo from './pages/Ammo';
-import Crafts from './pages/Crafts';
   };
 
   const handlePageChange = (page) => {
@@ -46,6 +46,8 @@ import Crafts from './pages/Crafts';
       case 'dashboard': return <Dashboard apiUrl={API_URL} />;
       case 'prices': return <Prices apiUrl={API_URL} />;
       case 'analytics': return <Analytics apiUrl={API_URL} />;
+      case 'ammo': return <Ammo apiUrl={API_URL} />;
+      case 'crafts': return <Crafts apiUrl={API_URL} />;
       case 'settings': return <Settings apiUrl={API_URL} />;
       default: return <Dashboard apiUrl={API_URL} />;
     }
@@ -84,8 +86,3 @@ export default function App() {
   );
 }
 
-            {/* Ammo */}
-            <Route path="/ammo" element={<Ammo />} />
-
-            {/* Crafts */}
-            <Route path="/crafts" element={<Crafts />} />
