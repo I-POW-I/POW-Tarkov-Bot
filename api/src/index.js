@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
+const ammoRouter = require('./routes/ammo');
+
 
 const app = express();
 const PORT = process.env.API_PORT || 3001;
@@ -21,10 +23,10 @@ app.use(express.json());
 
 // Supabase Client
 const supabase = createClient(
-const ammoRouter = require('./routes/ammo');
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
+
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -120,10 +122,10 @@ app.get('/api/prices/search', async (req, res) => {
       .limit(1);
 
     if (error) throw error;
-app.use('/api/ammo', ammoRouter);
 
     res.json(data?.[0] || null);
   } catch (error) {
+
     console.error('Price search error:', error);
     res.status(500).json({ error: 'Failed to search prices' });
   }
@@ -165,7 +167,10 @@ app.post('/api/admin/sync', async (req, res) => {
   }
 });
 
+app.use('/api/ammo', ammoRouter);
+
 app.listen(PORT, () => {
+
   console.log(`🚀 API Server running on port ${PORT}`);
   console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
 });
